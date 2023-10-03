@@ -1,3 +1,4 @@
+import { MdUpdate } from "react-icons/md";
 import Image from "next/image";
 import React, { useContext, useState, useEffect } from "react";
 import { GiModernCity } from "react-icons/gi";
@@ -10,7 +11,7 @@ const WeatherLocation: React.FC = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentTime(moment().format("DD-MM-YYYY h:mm:ss a"));
+      setCurrentTime(moment().format("DD-MM-YYYY - h:mm:ss a"));
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -45,16 +46,18 @@ const WeatherLocation: React.FC = () => {
         className="absolute top-0 left-0 flex flex-col justify-end gap-1 p-5 w-full h-full"
         style={{ background: "rgba(0,0,0,40%)", color: "white" }}
       >
-        <div className="text-gray-300 my-2">
+        <div className="text-gray-300">
           <span className="block">Latitude - {latitude}</span>
           <span className="block">Longitude - {longitude}</span>
         </div>
-        <p>{dateString}</p>
-        <p className="text-lg text-gray-200 capitalize flex items-center gap-2">
+        <p className="text-gray-300 flex items-center gap-2 my-1">
+          last update on - {dateString}
+        </p>
+        <p className="text-gray-200 capitalize flex items-center gap-2">
           <Image src={iconUrl} alt="Weather Icon" height={30} width={30} />
           <span>{description}</span>
         </p>
-        <p className="text-lg flex items-center gap-2">
+        <p className="flex items-center gap-2">
           <GiModernCity /> <span>{city}</span>
         </p>
         <p className="text-xl mt-2 text-white">{currentTime}</p>

@@ -11,8 +11,8 @@ const System = () => {
   if (!weatherData) {
     return <div>Loading...</div>;
   }
-  const sunriseTimestamp = 1696290264;
-  const sunsetTimestamp = 1696333157;
+  const sunriseTimestamp = weatherData.sys.sunrise;
+  const sunsetTimestamp = weatherData.sys.sunset;
 
   const sunriseMoment = moment.unix(sunriseTimestamp);
   const sunsetMoment = moment.unix(sunsetTimestamp);
