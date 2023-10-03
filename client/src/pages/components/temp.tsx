@@ -23,7 +23,7 @@ const Temp = () => {
 
   return (
     <div className="grid grid-cols-12 gap-5">
-      <div className="col-span-12 sm:col-span-3 bg-gray-500 p-2 rounded-xl flex flex-col items-center  justify-center text-white gap-2 h-32">
+      <div className="col-span-12 sm:col-span-4 bg-gray-500 p-2 rounded-xl flex flex-col items-center  justify-center text-white gap-2 h-32">
         <span className="text-5xl">
           <TbTemperature />
         </span>
@@ -34,13 +34,13 @@ const Temp = () => {
           {temperatureMin}K
         </p>
       </div>
-      <div className="col-span-12 sm:col-span-3 bg-gray-500 p-2 rounded-xl flex flex-col items-center  justify-center text-white gap-2 h-32">
+      <div className="col-span-12 sm:col-span-4 bg-gray-500 p-2 rounded-xl flex flex-col items-center  justify-center text-white gap-2 h-32">
         <span className="text-5xl">
           <TbTemperatureFahrenheit />
         </span>
         <p>Farenheit: {farTemp.toFixed(2)}°</p>
       </div>
-      <div className="col-span-12 sm:col-span-3 bg-gray-500 p-2 rounded-xl flex flex-col items-center  justify-center text-white gap-2 h-32">
+      <div className="col-span-12 sm:col-span-4 bg-gray-500 p-2 rounded-xl flex flex-col items-center  justify-center text-white gap-2 h-32">
         <span className="text-5xl">
           <TbTemperatureCelsius />
         </span>

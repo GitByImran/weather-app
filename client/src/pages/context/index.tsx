@@ -17,8 +17,8 @@ interface WeatherData {
   };
   sys: {
     country: string;
-    sunrise: string;
-    sunset: string;
+    sunrise: number;
+    sunset: number;
   };
   wind: {
     deg: number;
