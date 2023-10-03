@@ -2,11 +2,31 @@ import React, { ReactNode, createContext, useEffect, useState } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 interface WeatherData {
+  name: string;
+  timezone: number;
+  visibility: number;
+  dt: number;
   main: {
-    temp: string;
+    temp: number;
+    temp_max: number;
+    temp_min: number;
+  };
+  coord: {
+    lat: number;
+    lon: number;
+  };
+  sys: {
+    country: string;
+    sunrise: string;
+    sunset: string;
+  };
+  wind: {
+    deg: number;
+    speed: number;
   };
   weather: {
     description: string;
+    icon: string;
   }[];
 }
 

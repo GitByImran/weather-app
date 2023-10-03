@@ -1,27 +1,41 @@
-import { BsFillCloudsFill } from "react-icons/bs";
 import Image from "next/image";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GiModernCity } from "react-icons/gi";
 import { WeatherContext } from "../context";
+import moment from "moment";
 
-const WeatherLocatoin: React.FC = () => {
+const WeatherLocation: React.FC = () => {
   const { weatherData } = useContext(WeatherContext);
+  const [currentTime, setCurrentTime] = useState<string>("");
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(moment().format("DD-MM-YYYY h:mm:ss a"));
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []); // Empty dependency array means this effect runs once after the initial render
 
   if (!weatherData) {
     return <div>Loading...</div>;
   }
 
+  const timestamp = weatherData.dt;
+  const momentDate = moment.unix(timestamp);
+  const dateString = momentDate.format("LLLL");
+
   const iconCode = weatherData.weather[0].icon;
-  const iconUrl = `http://openweathermap.org/img/w/04n.png`;
+  const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
   const latitude = weatherData.coord.lat;
   const longitude = weatherData.coord.lon;
+  const city = weatherData.name;
   const description = weatherData.weather[0].description;
 
   return (
-    <div className="w-full h-60 rounded-xl overflow-hidden relative">
+    <div className="w-full h-60 sm:h-60 md:h-full rounded-xl overflow-hidden relative">
       <Image
-        src="https://images.pexels.com/photos/1915182/pexels-photo-1915182.jpeg?auto=compress&cs=tinysrgb&w=600"
-        alt="rainy-day"
+        src="https://images.pexels.com/photos/2310641/pexels-photo-2310641.jpeg?auto=compress&cs=tinysrgb&w=600"
+        alt="weather-icon"
         height={500}
         width={300}
         objectFit="cover"
@@ -35,16 +49,18 @@ const WeatherLocatoin: React.FC = () => {
           <span className="block">Latitude - {latitude}</span>
           <span className="block">Longitude - {longitude}</span>
         </div>
+        <p>{dateString}</p>
         <p className="text-lg text-gray-200 capitalize flex items-center gap-2">
-          <BsFillCloudsFill />
+          <Image src={iconUrl} alt="Weather Icon" height={30} width={30} />
           <span>{description}</span>
         </p>
         <p className="text-lg flex items-center gap-2">
-          <GiModernCity /> <span>Chittagong</span>
+          <GiModernCity /> <span>{city}</span>
         </p>
+        <p className="text-xl mt-2 text-white">{currentTime}</p>
       </div>
     </div>
   );
 };
 
-export default WeatherLocatoin;
+export default WeatherLocation;

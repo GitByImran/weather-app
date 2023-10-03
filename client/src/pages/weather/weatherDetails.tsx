@@ -1,25 +1,24 @@
 import React, { useContext } from "react";
 import { WeatherContext } from "../context";
-import Image from "next/image";
+import Wind from "../components/wind";
+import System from "../components/system";
+import Temp from "../components/temp";
 
-const WeatherDetails = () => {
+const WeatherDetails: React.FC = () => {
   const { weatherData } = useContext(WeatherContext);
 
   if (!weatherData) {
     return <div>Loading...</div>;
   }
 
-  const temperature = weatherData.main.temp;
-  const iconCode = weatherData.weather[0].icon;
-  const iconUrl = `http://openweathermap.org/img/w/04n.png`;
-
   return (
-    <div>
-      <h2>Weather Details</h2>
-      <Image src={iconUrl} alt="Weather Icon" height={100} width={100} />
-      <p>Temperature: {temperature}</p>
+    <div className="flex flex-col h-full justify-between gap-5">
+      <Temp />
+      <Wind />
+      <System />
     </div>
   );
 };
 
 export default WeatherDetails;
+
