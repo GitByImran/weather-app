@@ -11,15 +11,16 @@ const System = () => {
   if (!weatherData) {
     return <div>Loading...</div>;
   }
+
+  // converting sunrise timestamp to local time
   const sunriseTimestamp = weatherData.sys.sunrise;
   const sunsetTimestamp = weatherData.sys.sunset;
-
   const sunriseMoment = moment.unix(sunriseTimestamp);
   const sunsetMoment = moment.unix(sunsetTimestamp);
-
   const sunriseTime = sunriseMoment.format("LT");
   const sunsetTime = sunsetMoment.format("LT");
 
+  // converting api timezone to local time
   const timezoneOffsetSeconds = weatherData.timezone;
   const timezoneHours = timezoneOffsetSeconds / 3600;
   const timezoneGMT = `GMT${timezoneHours >= 0 ? "+" : "-"}${Math.abs(

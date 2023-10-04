@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { TbTemperature } from "react-icons/tb";
-import { FaTemperatureLow } from "react-icons/fa";
-import { FaTemperatureHigh } from "react-icons/fa";
 import { TbTemperatureFahrenheit } from "react-icons/tb";
 import { TbTemperatureCelsius } from "react-icons/tb";
-import Image from "next/image";
 import { WeatherContext } from "../context";
 
 const Temp = () => {
@@ -15,6 +12,7 @@ const Temp = () => {
     return <div>Loading...</div>;
   }
 
+  // converting kelvin temperature to celcius and farenheit
   const temperature = weatherData.main.temp;
   const temperatureMax = weatherData.main.temp_max;
   const temperatureMin = weatherData.main.temp_min;

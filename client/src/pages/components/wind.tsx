@@ -11,6 +11,7 @@ const Wind: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  // showing state of nature depend on visility value
   const getWeatherConditions = (visibility: number) => {
     if (visibility < 1000) {
       return "Foggy";
@@ -23,6 +24,7 @@ const Wind: React.FC = () => {
     }
   };
 
+  //
   const degree = weatherData.wind.deg;
   const speed = weatherData.wind.speed;
   const visibility = weatherData.visibility;
