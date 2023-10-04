@@ -75,6 +75,16 @@ const WeatherProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       }
     };
 
+    if (Notification && Notification.permission !== "granted") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted.");
+        } else {
+          console.warn("Notification permission denied.");
+        }
+      });
+    }
+
     fetchWeatherData();
   }, []);
 
