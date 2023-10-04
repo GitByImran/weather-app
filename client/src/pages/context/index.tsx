@@ -46,21 +46,47 @@ const WeatherProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     const fetchWeatherData = async () => {
-      
-      // trying to get the location with geolocation
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
-            // fetching data by using location latitude and longitude
             const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_API_KEY}`;
             axios
               .get<WeatherData>(apiUrl)
               .then((response: AxiosResponse<WeatherData>) => {
-                console.log(response.data);
+                console.log("Weather data fetched:", response.data);
                 setWeatherData(response.data);
+
+                if (Notification && Notification.permission === "granted") {
+                  console.log("Creating notification...");
+
+                  // Adding an icon to the notification
+                  const iconPath = "path/to/your/icon.png";
+
+                  const weatherNotification = new Notification(
+                    "Weather Update",
+                    {
+                      body: `Current temperature: ${response.data.main.temp}°C`,
+                      icon: iconPath,
+                    }
+                  );
+
+                  // Notification callbacks
+                  weatherNotification.onerror = (event) => {
+                    console.error("Notification error:", event);
+                  };
+
+                  weatherNotification.onclick = (event) => {
+                    console.log("Notification clicked:", event);
+                    // You can handle click events here, e.g., open a specific page
+                  };
+                } else {
+                  console.warn(
+                    "Notification not created. Permission may be denied."
+                  );
+                }
               })
               .catch((error: AxiosError) => {
                 console.error(`Error fetching weather data: ${error.message}`);
@@ -74,17 +100,7 @@ const WeatherProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         console.error("Geolocation is not supported by this browser.");
       }
     };
-
-    if (Notification && Notification.permission !== "granted") {
-      Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          console.log("Notification permission granted.");
-        } else {
-          console.warn("Notification permission denied.");
-        }
-      });
-    }
-
+    
     fetchWeatherData();
   }, []);
 
