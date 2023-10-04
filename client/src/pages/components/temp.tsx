@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { TbTemperature } from "react-icons/tb";
 import { TbTemperatureFahrenheit } from "react-icons/tb";
 import { TbTemperatureCelsius } from "react-icons/tb";
+import { HiOutlineArrowsUpDown } from "react-icons/hi2";
 import { WeatherContext } from "../context";
 
 const Temp = () => {
@@ -25,10 +25,9 @@ const Temp = () => {
         <span className="text-5xl">
           <TbTemperature />
         </span>
-        <p className="flex items-center">
+        <p className="flex items-center gap-1">
           {temperatureMax}K
-          <BsArrowUp />
-          <BsArrowDown />
+          <HiOutlineArrowsUpDown />
           {temperatureMin}K
         </p>
       </div>
