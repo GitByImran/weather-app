@@ -58,7 +58,7 @@ const WeatherProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
             axios
               .get<WeatherData>(apiUrl)
               .then((response: AxiosResponse<WeatherData>) => {
-                console.log(response.data);
+                // console.log(response.data);
                 setWeatherData(response.data);
               })
               .catch((error: AxiosError) => {
