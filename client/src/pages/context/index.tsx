@@ -60,17 +60,6 @@ const WeatherProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
               .then((response: AxiosResponse<WeatherData>) => {
                 console.log(response.data);
                 setWeatherData(response.data);
-
-                // Check if Notification permission is granted
-                if (Notification && Notification.permission === "granted") {
-                  const notificationOptions: NotificationOptions = {
-                    body: `Current weather: ${response.data.main.temp}°C, ${response.data.weather[0].description}`,
-                    icon: `favicon.ico`, // Replace with the actual path to your icon
-                  };
-
-                  // Send the notification
-                  new Notification("Weather Update", notificationOptions);
-                }
               })
               .catch((error: AxiosError) => {
                 console.error(`Error fetching weather data: ${error.message}`);
@@ -85,18 +74,6 @@ const WeatherProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       }
     };
 
-    if (Notification && Notification.permission !== "granted") {
-      Notification.requestPermission().then((permission) => {
-        if (permission === "granted") {
-          console.log("Notification permission granted.");
-          fetchWeatherData(); // Fetch weather data if permission is already granted
-        } else {
-          console.warn("Notification permission denied.");
-        }
-      });
-    }
-
-    // Fetch weather data on component mount
     fetchWeatherData();
   }, []);
 
