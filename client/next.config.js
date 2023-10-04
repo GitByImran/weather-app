@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     domains: [
       'images.pexels.com',
-      'openweathermap.org'
+      'openweathermap.org',
     ]
   }
 }
